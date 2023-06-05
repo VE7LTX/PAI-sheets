@@ -26,9 +26,8 @@ Obtain your Personal.ai API key. If you don't have one, you can sign up at Perso
 
 Run the script using the following command:
 
-bash
-Copy code
 python upload_memory_cli.py
+
 The CLI will prompt you to choose the file type (CSV or XLSX) you want to upload.
 
 After selecting the file type, the CLI will display the available files with the chosen extension in the current directory.
