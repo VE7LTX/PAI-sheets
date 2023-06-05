@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 import pytz
 import pandas as pd
-
+import time
 API_KEY_FILE = "api_key.txt"
 
 def get_local_time():
@@ -20,12 +20,17 @@ def create_memory(api_key, memory_data):
         'x-api-key': api_key
     }
 
+    print(f"Creating memory with data: {memory_data}")
+
     response = requests.post(base_url, headers=headers, json=memory_data)
 
     if response.status_code == 200:
         creation_status = response.json()['status']
+        print(f"Server responded with status: {creation_status}")
         return creation_status
     else:
+        print(f"Server responded with status code: {response.status_code}")
+        print(f"Response body: {response.text}")
         return None
 
 def select_file(files):
@@ -98,12 +103,14 @@ def main():
     memories = []
 
     for _, row in data.iterrows():
+        text_content = ', '.join([f'{header}: {str(row[header])}' for header in headers])
+
         memory_data = {
-            header: str(row[header]) for header in headers
+            'Text': f'#Filename: {selected_file}, #FileDescription: {file_description}, CreatedTime: {local_time}, {text_content}',
+            'SourceName': "My Custom Python Script",
+            'CreatedTime': local_time,
+            'DeviceName': "My Computer",
         }
-        memory_data['CreatedTime'] = local_time
-        memory_data['#Filename'] = selected_file
-        memory_data['#FileDescription'] = file_description
 
         memories.append(memory_data)
 
@@ -114,6 +121,9 @@ def main():
             print(f"Memory creation status: {creation_status}")
         else:
             print("Error creating memory")
-
-if __name__ == "__main__":
+            
+        time.sleep(1)   
+# end code statement for if name is main
+if __name__ == '__main__':
     main()
+    
