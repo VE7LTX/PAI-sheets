@@ -85,6 +85,9 @@ def main():
     selected_file = select_file(files)
     file_path = os.path.abspath(selected_file)
 
+    # Ask the user for the file description
+    file_description = input("Enter a description for the file: ")
+
     # Read data from the selected file
     if file_type == '1':
         data = pd.read_csv(file_path)
@@ -99,6 +102,8 @@ def main():
             header: str(row[header]) for header in headers
         }
         memory_data['CreatedTime'] = local_time
+        memory_data['#Filename'] = selected_file
+        memory_data['#FileDescription'] = file_description
 
         memories.append(memory_data)
 
