@@ -20,7 +20,7 @@ This command-line interface (CLI) application allows you to upload data from a C
    ```bash
 
    pip install -r requirements.txt
-   '''
+
 
 ##Usage
 
@@ -28,8 +28,8 @@ Obtain your Personal.ai API key. If you don't have one, you can sign up at Perso
 
 Run the script using the following command:
 
-bash
-python upload_memory_cli.py
+    '''bash
+    python upload_memory_cli.py
 
 The CLI will prompt you to choose the file type (CSV or XLSX) you want to upload.
 
